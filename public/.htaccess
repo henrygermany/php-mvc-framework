@@ -1,0 +1,13 @@
+RewriteEngine On
+RewriteBase /
+
+# only rewrite if request filename is not a dir or actual file
+RewriteCond %{REQUEST_FILENAME}% !-d
+RewriteCond %{REQUEST_FILENAME}%  !-f
+
+# Dont route static files in public dir
+RewriteRule \.(js|css|svg|gif|jpg|jpeg|png)$ -                  [L]
+
+# Route everthing to index.php in public dir                    append any query string from original request URL to
+#                                                               created query string
+RewriteRule ^(.*)$  index.php                                   [QSA,L]
